@@ -1,0 +1,5 @@
+mysql.csr
+mysql.key
+mysql.pem
+root-ca.key
+root-ca.pem
