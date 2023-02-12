@@ -1,14 +1,12 @@
 FROM ttbb/base:go AS build
-COPY . /opt/sh/compile
-WORKDIR /opt/sh/compile/pkg
+COPY . /opt/compile
+WORKDIR /opt/compile/pkg
 RUN go build -o mysql_mate .
-
 
 FROM ttbb/mysql:nake
 
-COPY --chown=sh:sh docker-build /opt/sh/mysql/mate
+COPY docker-build /opt/mysql/mate
 
-COPY --from=build --chown=sh:sh /opt/sh/compile/pkg/mysql_mate /opt/sh/mysql/mate/mysql_mate
+COPY --from=build /opt/compile/pkg/mysql_mate /opt/mysql/mate/mysql_mate
 
-USER sh
-CMD ["/usr/bin/dumb-init", "bash", "-vx", "/opt/sh/mysql/mate/scripts/start.sh"]
+CMD ["/usr/bin/dumb-init", "bash", "-vx", "/opt/mysql/mate/scripts/start.sh"]
