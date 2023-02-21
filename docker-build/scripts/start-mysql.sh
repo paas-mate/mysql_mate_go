@@ -22,3 +22,5 @@ echo "max_allowed_packet = 16M" >> $CONF_FILE
 mysqld --daemonize --user=root
 
 mysql -u root < $MYSQL_HOME/mate/sql/init.sql
+mysql -u root < $MYSQL_HOME/mate/sql/apolloconfigdb.sql
+mysql -u root < $MYSQL_HOME/mate/sql/apolloportaldb.sql
